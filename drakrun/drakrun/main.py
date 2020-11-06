@@ -311,6 +311,7 @@ class DrakrunKarton(Karton):
         outdir = os.path.join(workdir, 'output')
         os.mkdir(outdir)
         os.mkdir(os.path.join(outdir, 'dumps'))
+        os.mkdir(os.path.join(outdir, 'ipt'))
 
         metadata = {
             "sample_sha256": sha256sum,
@@ -339,6 +340,7 @@ class DrakrunKarton(Karton):
                 hooks_list = os.path.join(ETC_DIR, "hooks.txt")
                 kernel_profile = os.path.join(PROFILE_DIR, "kernel.json")
                 dump_dir = os.path.join(outdir, "dumps")
+                ipt_dir = os.path.join(outdir, "ipt")
                 drakmon_log_fp = os.path.join(outdir, "drakmon.log")
 
                 self.log.info("Copying sample to VM...")
@@ -381,6 +383,7 @@ class DrakrunKarton(Karton):
                                "-d", self.vm_name,
                                "--dll-hooks-list", hooks_list,
                                "--memdump-dir", dump_dir,
+                               "--ipt-dir", ipt_dir,
                                "-r", kernel_profile,
                                "-e", full_cmd,
                                "-c", cwd]
